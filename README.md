@@ -77,7 +77,7 @@ python src/analysis.py --rewards_dir output/with_rewards --gt_sql_file data/test
 ## Citation
 
 ```bibtex
-@misc{jordan2025opensourcing,
+@misc{agrawal2025text2sql,
   author       = {Sheshansh Agrawal and Thien Nguyen},
   title        = {Open-Sourcing the Best Local Text-to-SQL System},
   year         = {2025},
