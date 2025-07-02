@@ -1,7 +1,7 @@
 # ContextualAI's text-to-SQL pipeline for BIRD benchmark
 
 <p align="center">
-          &nbsp&nbsp🤗 <a href="https://huggingface.co/collections/ContextualAI/contextual-sql-68648806afcb0a708adbc4fb">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp :bookmark_tabs: <a href="https://qwenlm.github.io/blog/qwen3/">Blog</a>
+  &nbsp&nbsp🤗 <a href="https://huggingface.co/collections/ContextualAI/contextual-sql-68648806afcb0a708adbc4fb">Models</a>&nbsp&nbsp | &nbsp&nbsp :bookmark_tabs: <a href="https://qwenlm.github.io/blog/qwen3/">Blog</a>
 </p>
 
 ## Environment Setup
