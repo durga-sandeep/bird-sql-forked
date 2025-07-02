@@ -1,8 +1,8 @@
 # ContextualAI's text-to-SQL pipeline for BIRD benchmark
 
-## Overview
-
-This repository contains ContextualAI's text-to-SQL pipeline for the BIRD benchmark. For more details about our approach and results, check out our [blog post](https://contextual.ai/blog/open-sourcing-the-best-local-text-to-sql-system/).
+<p align="center">
+          &nbsp&nbsp🤗 <a href="https://huggingface.co/collections/ContextualAI/contextual-sql-68648806afcb0a708adbc4fb">Hugging Face</a>&nbsp&nbsp | &nbsp&nbsp :bookmark_tabs: <a href="https://qwenlm.github.io/blog/qwen3/">Blog</a>
+</p>
 
 ## Environment Setup
 
