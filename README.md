@@ -45,7 +45,7 @@ This will:
 ## Execution
 
 Requires 2+ GPUs with 80GB RAM each.
-The pipeline consists of three main stages:
+The pipeline consists of four main stages:
 
 1. **Candidate Generation**: Generate multiple SQL query candidates
 ```bash
