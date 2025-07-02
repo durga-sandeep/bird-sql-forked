@@ -1,5 +1,9 @@
 # ContextualAI's text-to-SQL pipeline for BIRD benchmark
 
+## Overview
+
+This repository contains ContextualAI's text-to-SQL pipeline for the BIRD benchmark. For more details about our approach and results, check out our [blog post](https://contextual.ai/blog/open-sourcing-the-best-local-text-to-sql-system/).
+
 ## Environment Setup
 
 Requires Python 3.10.
@@ -68,4 +72,15 @@ VLLM_USE_V1=0 time python src/reward.py --input_file output/with_results/data_wi
 4. **Analysis**: Choose the highest-scoring SQL for final output
 ```bash
 python src/analysis.py --rewards_dir output/with_rewards --gt_sql_file data/test_gold_sqls.txt --output_dir output/analysis --num_cpus 100
+```
+
+## Citation
+
+```bibtex
+@misc{jordan2025opensourcing,
+  author       = {Sheshansh Agrawal and Thien Nguyen},
+  title        = {Open-Sourcing the Best Local Text-to-SQL System},
+  year         = {2025},
+  url          = {https://contextual.ai/blog/open-sourcing-the-best-local-text-to-sql-system/}
+}
 ```
