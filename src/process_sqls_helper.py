@@ -555,6 +555,7 @@ def main():
 
         if lines_processed < total_length and iteration_lines == 0:
             # We found no new lines, so sleep
+            break
             print(f"[INFO] No new lines found. Sleeping {poll_interval} sec...")
             time.sleep(poll_interval)
 
