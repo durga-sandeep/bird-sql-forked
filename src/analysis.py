@@ -153,8 +153,10 @@ def main():
         data.extend(read_jsonl_file(file))
 
     gt_sql_data = read_tsv_file(args.gt_sql_file)
-    for datum in data:
-        datum["gt_sql"] = gt_sql_data[datum['question_id']][0]
+    # for datum in data:
+    #     datum["gt_sql"] = gt_sql_data[datum['question_id']][0]
+    for i, datum in enumerate(data):
+        datum["gt_sql"] = gt_sql_data[i][0]
 
     print("Selecting")
     select(data, logprob_alpha=0.4)
