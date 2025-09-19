@@ -17,11 +17,12 @@ echo "Step 3: Installing huggingface_hub..."
 pip install huggingface_hub
 
 echo "Step 4: Configuring git..."
+cd bird-sql-forked
 git config user.name "durga-sandeep"
 git config user.email "durga@distyl.ai"
 
 echo "Step 5: Creating conda environment..."
-conda create -n bird-sql python=3.10 -y
+conda create -n bird-sql python=3.10
 
 echo "Step 6: Initializing conda for bash..."
 conda init bash
