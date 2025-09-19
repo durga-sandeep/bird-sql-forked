@@ -127,9 +127,9 @@ def main():
         "--model", type=str, default="models/generator", required=False
     )
     parser.add_argument("--system_prompt", type=str, default="You are a SQLite expert tasked with writing SQL for a given natural language user query. You would be given database information in form of CREATE TABLE statements; External Knowledge which are hints; user natural language query. Your task is to write valid SQLite to answer the user questions for the tables provided.", required=False)
-    parser.add_argument("--batch_size", type=int, default=16, required=False)
-    parser.add_argument("--num_samples_per_prompt", type=int, default=2, required=False)
-    parser.add_argument("--num_prompts_per_query", type=int, default=2, required=False)
+    parser.add_argument("--batch_size", type=int, default=1024, required=False)
+    parser.add_argument("--num_samples_per_prompt", type=int, default=16, required=False)
+    parser.add_argument("--num_prompts_per_query", type=int, default=16, required=False)
     parser.add_argument("--num_shots", type=int, default=1, required=False)
     parser.add_argument("--max_tokens", type=int, default=1024, required=False)
     parser.add_argument("--seed", type=int, default=42, required=False)
@@ -215,7 +215,7 @@ def main():
         model=args.model,
         dtype="bfloat16",
         trust_remote_code=True,
-        gpu_memory_utilization=0.9,
+        gpu_memory_utilization=0.93,
         max_model_len=16384,
         tensor_parallel_size=args.num_gpus,
         swap_space=0,

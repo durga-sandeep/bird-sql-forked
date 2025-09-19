@@ -4,8 +4,6 @@
 set -e
 
 # Activate conda environment
-echo "Activating bird-sql conda environment..."
-conda activate bird-sql
 
 echo "Starting sequential execution of BIRD SQL pipeline..."
 
