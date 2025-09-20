@@ -70,8 +70,8 @@ def generate_database_schema(db_path: str, db_id: str) -> None:
     
     if not os.path.exists(mschema_path):
         db_engine = create_engine(f"sqlite:///{db_path}")
-        schema_engine = SchemaEngine(engine=db_engine, db_name=db_id)
-        mschema_str = schema_engine.mschema.to_mschema()
+        schema_engine = SchemaEngine(engine=db_engine, db_name=db_id, db_path=db_path)
+        mschema_str = schema_engine.mschema.to_mschema(add_desc=True, add_null=False)
         
         with open(mschema_path, "w", encoding="utf-8") as f:
             f.write(mschema_str)

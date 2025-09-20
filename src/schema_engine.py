@@ -1,10 +1,13 @@
 import datetime
 import decimal
 import json
+import os
 import re
+from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Union
 from typing import Sequence as _typing_Sequence
 
+import pandas as pd
 import sqlalchemy
 from sqlalchemy import MetaData, Table, create_engine, insert, inspect, select, text
 from sqlalchemy.engine import Connection, Engine
@@ -395,6 +398,7 @@ class MSchema:
         autoincrement: bool = False,
         comment: str = "",
         examples: list = [],
+        value_description: str = "",
         **kwargs,
     ):
         self.tables[table_name]["fields"][field_name] = {
@@ -405,6 +409,7 @@ class MSchema:
             "autoincrement": autoincrement,
             "comment": comment,
             "examples": examples.copy(),
+            "value_description": value_description,
             **kwargs,
         }
 
@@ -448,6 +453,8 @@ class MSchema:
         selected_columns: List = None,
         example_num=3,
         show_type_detail=False,
+        add_null=False,
+        add_desc=False,
     ) -> str:
         table_info = self.tables.get(table_name, {})
         output = []
@@ -489,9 +496,10 @@ class MSchema:
                 field_line += f", Primary Key"
 
             ## 添加nullable信息
-            is_nullable = field_info.get("nullable", True)
-            if not is_nullable:
-                field_line += f", NOT NULL"
+            if add_null:
+                is_nullable = field_info.get("nullable", True)
+                if not is_nullable:
+                    field_line += f", NOT NULL"
 
             # 如果有示例，添加上
             if len(field_info.get("examples", [])) > 0 and example_num > 0:
@@ -517,6 +525,13 @@ class MSchema:
                     pass
             else:
                 field_line += ""
+
+            # 添加value_description信息
+            if add_desc:
+                value_desc = field_info.get("value_description", "").strip()
+                if value_desc:
+                    field_line += f", {value_desc}"
+
             field_line += ")"
 
             field_lines.append(field_line)
@@ -532,6 +547,8 @@ class MSchema:
         selected_columns: List = None,
         example_num=3,
         show_type_detail=False,
+        add_null=False,
+        add_desc=False,
     ) -> str:
         """
         convert to a MSchema string.
@@ -564,7 +581,7 @@ class MSchema:
                     cur_selected_columns = selected_columns
                 output.append(
                     self.single_table_mschema(
-                        table_name, cur_selected_columns, example_num, show_type_detail
+                        table_name, cur_selected_columns, example_num, show_type_detail, add_null, add_desc
                     )
                 )
 
@@ -619,6 +636,7 @@ class SchemaEngine(SQLDatabase):
         max_string_length: int = 300,
         mschema: Optional[MSchema] = None,
         db_name: Optional[str] = "",
+        db_path: Optional[str] = "",
     ):
         super().__init__(
             engine,
@@ -634,6 +652,7 @@ class SchemaEngine(SQLDatabase):
         )
 
         self._db_name = db_name
+        self._db_path = db_path
         self._usable_tables = [
             table_name
             for table_name in self._usable_tables
@@ -689,7 +708,39 @@ class SchemaEngine(SQLDatabase):
                     values.append(value[0])
         return values
 
+    def load_value_descriptions(self, db_path: str) -> Dict[str, Dict[str, str]]:
+        """Load value descriptions from CSV files in database_description folder."""
+        descriptions = {}
+
+        # Construct path to database_description folder
+        db_dir = Path(db_path).parent
+        desc_dir = db_dir / "database_description"
+
+        if not desc_dir.exists():
+            return descriptions
+
+        # Read each CSV file (table_name.csv)
+        for csv_file in desc_dir.glob("*.csv"):
+            table_name = csv_file.stem
+            descriptions[table_name] = {}
+
+            try:
+                df = pd.read_csv(csv_file)
+                for _, row in df.iterrows():
+                    original_column = str(row.get('original_column_name', '')).strip()
+                    value_desc = str(row.get('value_description_cleaned', '')).strip()
+                    if original_column and value_desc and value_desc != 'nan':
+                        descriptions[table_name][original_column] = value_desc
+            except Exception:
+                # Skip files that can't be read
+                continue
+
+        return descriptions
+
     def init_mschema(self):
+        # Load value descriptions from CSV files
+        value_descriptions = self.load_value_descriptions(self._db_path) if self._db_path else {}
+
         for table_name in self._usable_tables:
             table_comment = self.get_table_comment(table_name)
             table_comment = "" if table_comment is None else table_comment.strip()
@@ -726,6 +777,10 @@ class SchemaEngine(SQLDatabase):
                     examples = []
                 examples = examples_to_str(examples)
 
+                # Get value description for this field
+                table_descriptions = value_descriptions.get(table_name, {})
+                value_description = table_descriptions.get(field_name, "")
+
                 self._mschema.add_field(
                     table_name,
                     field_name,
@@ -736,6 +791,7 @@ class SchemaEngine(SQLDatabase):
                     autoincrement=autoincrement,
                     comment=field_comment,
                     examples=examples,
+                    value_description=value_description,
                 )
 
 # db_path = "data/test_databases/formula_1/formula_1.sqlite"
