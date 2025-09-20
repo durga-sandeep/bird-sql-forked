@@ -2,12 +2,82 @@ import argparse
 import logging
 import os
 import random
+import re
 
 import numpy as np
+import sqlglot
+from sqlglot import expressions as exp
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
+from sqlalchemy import create_engine
 
 from utils import append_jsonl_file, read_json_file, read_jsonl_file
+from schema_engine import SchemaEngine
+
+
+def extract_schema_linking(sql_query, dialect="sqlite"):
+    """Extract table and column information from SQL query using sqlglot."""
+    try:
+        # Clean up any ANSI escape codes
+        clean_query = re.sub(r'\x1b\[[0-9;]*m', '', sql_query)
+
+        parsed = sqlglot.parse_one(clean_query, dialect="sqlite")
+
+        # Build alias mapping
+        alias_to_table = {}
+        for table in parsed.find_all(exp.Table):
+            if table.alias:
+                alias_to_table[table.alias] = table.name
+            alias_to_table[table.name] = table.name
+
+        schema_linking = {}
+
+        # Find all column references
+        for column in parsed.find_all(exp.Column):
+            if column.table:
+                table_name = alias_to_table.get(column.table, column.table)
+                column_name = column.name
+
+                if table_name not in schema_linking:
+                    schema_linking[table_name] = set()
+                schema_linking[table_name].add(column_name)
+
+        return {table: list(columns) for table, columns in schema_linking.items()}
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+def get_linked_schema(db_path, db_id, sql_query):
+    """Generate schema for only the tables/columns used in the SQL query."""
+    try:
+        # Extract table/column information from SQL
+        schema_info = extract_schema_linking(sql_query)
+
+        if "error" in schema_info:
+            # If parsing fails, fall back to full schema
+            return open(f"{db_path}.mschema", "r").read()
+
+        # Get the tables used in the query
+        tables_used = list(schema_info.keys())
+
+        if not tables_used:
+            # If no tables found, fall back to full schema
+            return open(f"{db_path}.mschema", "r").read()
+
+        # Create schema engine and generate filtered mschema
+        db_engine = create_engine(f"sqlite:///{db_path}")
+        schema_engine = SchemaEngine(engine=db_engine, db_name=db_id)
+
+        # Generate mschema for only the linked tables
+        linked_mschema = schema_engine.mschema.to_mschema(selected_tables=tables_used)
+
+        return linked_mschema
+
+    except Exception as e:
+        logging.warning(f"Schema linking failed for {db_id}: {e}. Using full schema.")
+        # Fall back to full schema if anything goes wrong
+        return open(f"{db_path}.mschema", "r").read()
 
 
 # Configure logging
@@ -19,9 +89,17 @@ def setup_logging(log_file):
     )
 
 
-def generate_prompt_message(datum):
+def generate_prompt_message(datum, use_schema_linking=True):
+    if use_schema_linking and "SQL" in datum and datum["SQL"]:
+        # Use schema linking with golden SQL
+        schema_content = get_linked_schema(datum['db_path'], datum.get('db_id', 'unknown'), datum["SQL"])
+    else:
+        # Fall back to full schema
+        print(f"Using full schema for {datum['db_id']}")
+        schema_content = open(f"{datum['db_path']}.mschema", "r").read()
+
     return (
-        open(f"{datum['db_path']}.mschema", "r").read()
+        schema_content
         + "\n\n"
         + "-- External Knowledge: {}".format(datum["evidence"])
         + "\n"
@@ -45,7 +123,7 @@ def generate_fewshot_messages(args, fewshot_data, rng):
         messages.append(
             {
                 "role": "user",
-                "content": generate_prompt_message(fewshot_data[sampled_index]),
+                "content": generate_prompt_message(fewshot_data[sampled_index], use_schema_linking=False),
             }
         )
         messages.append(
@@ -61,7 +139,7 @@ def generate_prompt_messages(args, datum, fewshot_messages):
     return [
         {"role": "system", "content": args.system_prompt},
         *fewshot_messages,
-        {"role": "user", "content": generate_prompt_message(datum)},
+        {"role": "user", "content": generate_prompt_message(datum, use_schema_linking=args.use_schema_linking)},
     ]
 
 
@@ -146,6 +224,7 @@ def main():
     )
     parser.add_argument("--num_partitions", type=int, default=1, required=False)
     parser.add_argument("--partition_index", type=int, default=0, required=False)
+    parser.add_argument("--use_schema_linking", action="store_true", help="Use schema linking to filter tables based on golden SQL")
 
     args = parser.parse_args()
     args.stop = args.stop.split()
