@@ -488,6 +488,11 @@ class MSchema:
             if is_primary_key:
                 field_line += f", Primary Key"
 
+            ## 添加nullable信息
+            is_nullable = field_info.get("nullable", True)
+            if not is_nullable:
+                field_line += f", NOT NULL"
+
             # 如果有示例，添加上
             if len(field_info.get("examples", [])) > 0 and example_num > 0:
                 examples = field_info["examples"]
