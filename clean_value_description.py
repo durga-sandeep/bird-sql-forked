@@ -200,7 +200,7 @@ def find_csv_files(base_path: Path) -> list[Path]:
 async def main_async():
     parser = argparse.ArgumentParser(description="Clean value descriptions in CSV files using GPT-4o")
     parser.add_argument("--base-path",
-                       default="/Users/dsaluru/Desktop/GPU/bird-sql-forked/data/test_databases",
+                       default="/home/ubuntu/bird-sql-forked/data/test_databases",
                        help="Base path to search for CSV files")
     parser.add_argument("--dry-run", action="store_true",
                        help="Show what would be done without making changes")
