@@ -28,10 +28,18 @@ def generate_prompt_message(datum):
         + "-- Using valid SQLite and understanding External Knowledge, "
         "answer the following questions for the tables provided above."
         + "\n"
+        + "-- Additional Instructions:\n"
+        + "-- 1. Use RANK() instead of ROW_NUMBER() to handle ties properly\n"
+        + "-- 2. For LIMIT: 'LIMIT offset, rows' skips offset rows and returns rows (0-indexed). 'LIMIT rows' returns first rows.\n"
+        + "-- 3. 'At most N fields' means return all available fields up to that maximum\n"
         + "-- {}".format(datum["question"])
         + "\nJust output SQL starting with SELECT directly, dont output anything else."
     )
 
+# instructions from Distyl pipeline
+# + "-- 4. NEVER use '*' - always explicitly specify column names in SELECT, COUNT, etc.\n"
+#         + "-- 5. Use JULIANDAY() for date calculations - compute difference in days then convert to desired unit\n"
+#         + "-- 6. Order columns in SELECT clause to match the order requested in the input query\n"
 
 def generate_fewshot_messages(args, fewshot_data, rng):
     """Randomly sample `args.num_shots` few-shot examples from `fewshot_data`."""
