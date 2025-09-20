@@ -48,7 +48,7 @@ def extract_schema_linking(sql_query, dialect="sqlite"):
         return {"error": str(e)}
 
 
-def get_linked_schema(db_path, db_id, sql_query):
+def get_linked_schema(db_path, db_id, sql_query, include_columns=False):
     """Generate schema for only the tables/columns used in the SQL query."""
     try:
         # Extract table/column information from SQL
@@ -69,8 +69,21 @@ def get_linked_schema(db_path, db_id, sql_query):
         db_engine = create_engine(f"sqlite:///{db_path}")
         schema_engine = SchemaEngine(engine=db_engine, db_name=db_id)
 
-        # Generate mschema for only the linked tables
-        linked_mschema = schema_engine.mschema.to_mschema(selected_tables=tables_used)
+        if include_columns:
+            # Build selected_columns list in format ['table.column']
+            selected_columns = []
+            for table, columns in schema_info.items():
+                for column in columns:
+                    selected_columns.append(f"{table}.{column}")
+
+            # Generate mschema for only the linked tables and columns
+            linked_mschema = schema_engine.mschema.to_mschema(
+                selected_tables=tables_used,
+                selected_columns=selected_columns
+            )
+        else:
+            # Generate mschema for only the linked tables (all columns)
+            linked_mschema = schema_engine.mschema.to_mschema(selected_tables=tables_used)
 
         return linked_mschema
 
@@ -89,10 +102,15 @@ def setup_logging(log_file):
     )
 
 
-def generate_prompt_message(datum, use_schema_linking=True):
+def generate_prompt_message(datum, use_schema_linking=True, include_columns_linking=False):
     if use_schema_linking and "SQL" in datum and datum["SQL"]:
         # Use schema linking with golden SQL
-        schema_content = get_linked_schema(datum['db_path'], datum.get('db_id', 'unknown'), datum["SQL"])
+        schema_content = get_linked_schema(
+            datum['db_path'],
+            datum.get('db_id', 'unknown'),
+            datum["SQL"],
+            include_columns=include_columns_linking
+        )
     else:
         # Fall back to full schema
         print(f"Using full schema for {datum['db_id']}")
@@ -123,7 +141,7 @@ def generate_fewshot_messages(args, fewshot_data, rng):
         messages.append(
             {
                 "role": "user",
-                "content": generate_prompt_message(fewshot_data[sampled_index], use_schema_linking=False),
+                "content": generate_prompt_message(fewshot_data[sampled_index], use_schema_linking=False, include_columns_linking=False),
             }
         )
         messages.append(
@@ -139,7 +157,7 @@ def generate_prompt_messages(args, datum, fewshot_messages):
     return [
         {"role": "system", "content": args.system_prompt},
         *fewshot_messages,
-        {"role": "user", "content": generate_prompt_message(datum, use_schema_linking=args.use_schema_linking)},
+        {"role": "user", "content": generate_prompt_message(datum, use_schema_linking=args.use_schema_linking, include_columns_linking=args.include_columns_linking)},
     ]
 
 
@@ -225,6 +243,7 @@ def main():
     parser.add_argument("--num_partitions", type=int, default=1, required=False)
     parser.add_argument("--partition_index", type=int, default=0, required=False)
     parser.add_argument("--use_schema_linking", action="store_true", help="Use schema linking to filter tables based on golden SQL")
+    parser.add_argument("--include_columns_linking", action="store_true", help="Include column-level linking (only show columns used in SQL)")
 
     args = parser.parse_args()
     args.stop = args.stop.split()
