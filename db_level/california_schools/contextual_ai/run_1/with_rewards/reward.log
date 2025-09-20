@@ -1,0 +1,15 @@
+2025-09-20 21:01:09,455 - INFO - Starting reward script with arguments:
+2025-09-20 21:01:09,456 - INFO -   input_file: output/with_results/data_with_results.jsonl
+2025-09-20 21:01:09,456 - INFO -   output_dir: output/with_rewards
+2025-09-20 21:01:09,456 - INFO -   model: models/reward
+2025-09-20 21:01:09,456 - INFO -   max_tokens: 16384
+2025-09-20 21:01:09,456 - INFO -   batch_size: 16384
+2025-09-20 21:01:09,456 - INFO -   output_col: reward
+2025-09-20 21:01:09,456 - INFO -   num_gpus: 1
+2025-09-20 21:01:09,456 - INFO -   partition_index: 0
+2025-09-20 21:01:09,456 - INFO -   num_partitions: 1
+2025-09-20 21:01:09,456 - INFO - Reading input data...
+2025-09-20 21:01:09,672 - INFO - Data size after partitioning: 30 items (partition 1 of 1)
+2025-09-20 21:01:09,672 - INFO - Output file path: output/with_rewards/data_reward_all.jsonl
+2025-09-20 21:02:01,141 - DEBUG - Starting new HTTPS connection (1): stats.vllm.ai:443
+2025-09-20 21:02:01,336 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
