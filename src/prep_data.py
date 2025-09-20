@@ -27,8 +27,8 @@ def download_with_progress(url: str, path: Path) -> None:
 
 def extract_and_organize_files(data_dir: Path) -> None:
     """Extract dataset and organize files into expected structure."""
-    zip_path = data_dir / "dev_mini_zip.zip"
-    extracted_dir = data_dir / "dev_mini_zip"
+    zip_path = data_dir / "dev.zip"
+    extracted_dir = data_dir / "dev"
     
     # Extract main dataset
     if not extracted_dir.exists():
@@ -142,10 +142,13 @@ def setup_bird_dataset(data_dir: str = "data") -> None:
     data_dir.mkdir(exist_ok=True)
     
     print("=== BIRD Dataset Setup ===")
-    zip_path = data_dir / "dev_mini_zip.zip"
+    zip_path = data_dir / "dev.zip"
     # Step 1: Download dataset
     # The Google Drive sharing URL (the original one is fine)
-    url = "https://drive.google.com/file/d/1VqkmQawhg6M8DFvo4gWQvOLyilWDDeJo/view?usp=sharing"
+    # dev-mini - cs - https://drive.google.com/file/d/1iGAaD0u26NixN4bI2zElQVQKa9TZY2EK/view?usp=sharing
+    # dev-mini-full - https://drive.google.com/file/d/1VqkmQawhg6M8DFvo4gWQvOLyilWDDeJo/view?usp=sharing
+
+    url = "https://drive.google.com/file/d/1iGAaD0u26NixN4bI2zElQVQKa9TZY2EK/view?usp=sharing"
 
     if not zip_path.exists():
         print("Downloading dataset from Google Drive...")
