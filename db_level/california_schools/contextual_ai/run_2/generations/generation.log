@@ -1,0 +1,191 @@
+2025-09-20 21:04:12,165 - INFO - Starting generation script with arguments:
+2025-09-20 21:04:12,165 - INFO -   input_file: data/test_all.jsonl
+2025-09-20 21:04:12,165 - INFO -   output_dir: output/generations/
+2025-09-20 21:04:12,165 - INFO -   few_shot_dir: few_shots
+2025-09-20 21:04:12,165 - INFO -   model: models/generator
+2025-09-20 21:04:12,165 - INFO -   system_prompt: You are a SQLite expert tasked with writing SQL for a given natural language user query. You would be given database information in form of CREATE TABLE statements; External Knowledge which are hints; user natural language query. Your task is to write valid SQLite to answer the user questions for the tables provided.
+2025-09-20 21:04:12,165 - INFO -   batch_size: 512
+2025-09-20 21:04:12,165 - INFO -   num_samples_per_prompt: 16
+2025-09-20 21:04:12,165 - INFO -   num_prompts_per_query: 16
+2025-09-20 21:04:12,165 - INFO -   num_shots: 1
+2025-09-20 21:04:12,165 - INFO -   max_tokens: 1024
+2025-09-20 21:04:12,165 - INFO -   seed: 42
+2025-09-20 21:04:12,165 - INFO -   temperature: 1.0
+2025-09-20 21:04:12,166 - INFO -   num_gpus: 1
+2025-09-20 21:04:12,166 - INFO -   start_from_scratch: False
+2025-09-20 21:04:12,166 - INFO -   stop: [';', '<pad>', '<|endoftext|>', '</s>', '<|im_end|>']
+2025-09-20 21:04:12,166 - INFO -   num_partitions: 1
+2025-09-20 21:04:12,166 - INFO -   partition_index: 0
+2025-09-20 21:04:12,166 - INFO - Reading input data...
+2025-09-20 21:04:12,166 - INFO - Data size after partitioning: 30 items (partition 1 of 1)
+2025-09-20 21:04:12,189 - INFO - Read 7428 few-shot examples from few_shots
+2025-09-20 21:04:12,189 - INFO - Output file path: output/generations/data_gen.jsonl
+2025-09-20 21:04:12,189 - INFO - No existing progress to resume from. Starting from scratch.
+2025-09-20 21:04:12,189 - INFO - Initializing model and tokenizer...
+2025-09-20 21:04:23,829 - DEBUG - Starting new HTTPS connection (1): stats.vllm.ai:443
+2025-09-20 21:04:23,975 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-20 21:05:35,391 - INFO - Model and tokenizer initialized.
+2025-09-20 21:05:35,391 - DEBUG - Fast-forwarding random seed for 0 iterations...
+2025-09-20 21:05:35,392 - DEBUG - Done fast-forwarding random state.
+2025-09-20 21:05:35,392 - INFO - === Starting iteration 0 / 15 ===
+2025-09-20 21:05:35,393 - DEBUG - Sampled few-shot indices: 5238
+2025-09-20 21:05:35,393 - INFO - Generated 1 few-shot messages using indices 5238
+2025-09-20 21:05:35,394 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:05:35,394 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:05:35,440 - DEBUG - Running generation on the batch...
+2025-09-20 21:05:49,824 - DEBUG - Generation for this batch completed.
+2025-09-20 21:05:49,859 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:05:49,860 - INFO - Progress saved: iteration=0, next data index=30
+2025-09-20 21:05:49,860 - INFO - Completed iteration 0
+2025-09-20 21:05:49,860 - INFO - === Starting iteration 1 / 15 ===
+2025-09-20 21:05:49,861 - DEBUG - Sampled few-shot indices: 912
+2025-09-20 21:05:49,861 - INFO - Generated 1 few-shot messages using indices 912
+2025-09-20 21:05:49,861 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:05:49,862 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:05:49,871 - DEBUG - Running generation on the batch...
+2025-09-20 21:06:08,545 - DEBUG - Generation for this batch completed.
+2025-09-20 21:06:08,580 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:06:08,581 - INFO - Progress saved: iteration=1, next data index=30
+2025-09-20 21:06:08,581 - INFO - Completed iteration 1
+2025-09-20 21:06:08,581 - INFO - === Starting iteration 2 / 15 ===
+2025-09-20 21:06:08,582 - DEBUG - Sampled few-shot indices: 204
+2025-09-20 21:06:08,582 - INFO - Generated 1 few-shot messages using indices 204
+2025-09-20 21:06:08,582 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:06:08,582 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:06:08,591 - DEBUG - Running generation on the batch...
+2025-09-20 21:06:34,921 - DEBUG - Generation for this batch completed.
+2025-09-20 21:06:34,957 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:06:34,958 - INFO - Progress saved: iteration=2, next data index=30
+2025-09-20 21:06:34,958 - INFO - Completed iteration 2
+2025-09-20 21:06:34,958 - INFO - === Starting iteration 3 / 15 ===
+2025-09-20 21:06:34,959 - DEBUG - Sampled few-shot indices: 6074
+2025-09-20 21:06:34,959 - INFO - Generated 1 few-shot messages using indices 6074
+2025-09-20 21:06:34,959 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:06:34,959 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:06:34,968 - DEBUG - Running generation on the batch...
+2025-09-20 21:06:50,317 - DEBUG - Generation for this batch completed.
+2025-09-20 21:06:50,354 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:06:50,355 - INFO - Progress saved: iteration=3, next data index=30
+2025-09-20 21:06:50,355 - INFO - Completed iteration 3
+2025-09-20 21:06:50,355 - INFO - === Starting iteration 4 / 15 ===
+2025-09-20 21:06:50,356 - DEBUG - Sampled few-shot indices: 2253
+2025-09-20 21:06:50,356 - INFO - Generated 1 few-shot messages using indices 2253
+2025-09-20 21:06:50,356 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:06:50,356 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:06:50,365 - DEBUG - Running generation on the batch...
+2025-09-20 21:07:05,628 - DEBUG - Generation for this batch completed.
+2025-09-20 21:07:05,664 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:07:05,665 - INFO - Progress saved: iteration=4, next data index=30
+2025-09-20 21:07:05,665 - INFO - Completed iteration 4
+2025-09-20 21:07:05,665 - INFO - === Starting iteration 5 / 15 ===
+2025-09-20 21:07:05,666 - DEBUG - Sampled few-shot indices: 2006
+2025-09-20 21:07:05,666 - INFO - Generated 1 few-shot messages using indices 2006
+2025-09-20 21:07:05,666 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:07:05,666 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:07:05,675 - DEBUG - Running generation on the batch...
+2025-09-20 21:07:21,127 - DEBUG - Generation for this batch completed.
+2025-09-20 21:07:21,164 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:07:21,164 - INFO - Progress saved: iteration=5, next data index=30
+2025-09-20 21:07:21,165 - INFO - Completed iteration 5
+2025-09-20 21:07:21,165 - INFO - === Starting iteration 6 / 15 ===
+2025-09-20 21:07:21,165 - DEBUG - Sampled few-shot indices: 1828
+2025-09-20 21:07:21,166 - INFO - Generated 1 few-shot messages using indices 1828
+2025-09-20 21:07:21,166 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:07:21,166 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:07:21,175 - DEBUG - Running generation on the batch...
+2025-09-20 21:07:35,669 - DEBUG - Generation for this batch completed.
+2025-09-20 21:07:35,704 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:07:35,705 - INFO - Progress saved: iteration=6, next data index=30
+2025-09-20 21:07:35,705 - INFO - Completed iteration 6
+2025-09-20 21:07:35,705 - INFO - === Starting iteration 7 / 15 ===
+2025-09-20 21:07:35,705 - DEBUG - Sampled few-shot indices: 1143
+2025-09-20 21:07:35,706 - INFO - Generated 1 few-shot messages using indices 1143
+2025-09-20 21:07:35,706 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:07:35,706 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:07:35,715 - DEBUG - Running generation on the batch...
+2025-09-20 21:07:51,023 - DEBUG - Generation for this batch completed.
+2025-09-20 21:07:51,059 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:07:51,059 - INFO - Progress saved: iteration=7, next data index=30
+2025-09-20 21:07:51,059 - INFO - Completed iteration 7
+2025-09-20 21:07:51,060 - INFO - === Starting iteration 8 / 15 ===
+2025-09-20 21:07:51,060 - DEBUG - Sampled few-shot indices: 6033
+2025-09-20 21:07:51,060 - INFO - Generated 1 few-shot messages using indices 6033
+2025-09-20 21:07:51,061 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:07:51,061 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:07:51,070 - DEBUG - Running generation on the batch...
+2025-09-20 21:08:07,782 - DEBUG - Generation for this batch completed.
+2025-09-20 21:08:07,819 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:08:07,819 - INFO - Progress saved: iteration=8, next data index=30
+2025-09-20 21:08:07,819 - INFO - Completed iteration 8
+2025-09-20 21:08:07,820 - INFO - === Starting iteration 9 / 15 ===
+2025-09-20 21:08:07,820 - DEBUG - Sampled few-shot indices: 839
+2025-09-20 21:08:07,821 - INFO - Generated 1 few-shot messages using indices 839
+2025-09-20 21:08:07,821 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:08:07,821 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:08:07,830 - DEBUG - Running generation on the batch...
+2025-09-20 21:08:22,686 - DEBUG - Generation for this batch completed.
+2025-09-20 21:08:22,722 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:08:22,723 - INFO - Progress saved: iteration=9, next data index=30
+2025-09-20 21:08:22,723 - INFO - Completed iteration 9
+2025-09-20 21:08:22,723 - INFO - === Starting iteration 10 / 15 ===
+2025-09-20 21:08:22,724 - DEBUG - Sampled few-shot indices: 5543
+2025-09-20 21:08:22,724 - INFO - Generated 1 few-shot messages using indices 5543
+2025-09-20 21:08:22,724 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:08:22,724 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:08:22,733 - DEBUG - Running generation on the batch...
+2025-09-20 21:08:37,967 - DEBUG - Generation for this batch completed.
+2025-09-20 21:08:38,003 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:08:38,003 - INFO - Progress saved: iteration=10, next data index=30
+2025-09-20 21:08:38,003 - INFO - Completed iteration 10
+2025-09-20 21:08:38,004 - INFO - === Starting iteration 11 / 15 ===
+2025-09-20 21:08:38,004 - DEBUG - Sampled few-shot indices: 6067
+2025-09-20 21:08:38,004 - INFO - Generated 1 few-shot messages using indices 6067
+2025-09-20 21:08:38,005 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:08:38,005 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:08:38,014 - DEBUG - Running generation on the batch...
+2025-09-20 21:08:55,045 - DEBUG - Generation for this batch completed.
+2025-09-20 21:08:55,081 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:08:55,081 - INFO - Progress saved: iteration=11, next data index=30
+2025-09-20 21:08:55,081 - INFO - Completed iteration 11
+2025-09-20 21:08:55,082 - INFO - === Starting iteration 12 / 15 ===
+2025-09-20 21:08:55,082 - DEBUG - Sampled few-shot indices: 7308
+2025-09-20 21:08:55,083 - INFO - Generated 1 few-shot messages using indices 7308
+2025-09-20 21:08:55,083 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:08:55,083 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:08:55,092 - DEBUG - Running generation on the batch...
+2025-09-20 21:09:11,030 - DEBUG - Generation for this batch completed.
+2025-09-20 21:09:11,067 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:09:11,068 - INFO - Progress saved: iteration=12, next data index=30
+2025-09-20 21:09:11,068 - INFO - Completed iteration 12
+2025-09-20 21:09:11,068 - INFO - === Starting iteration 13 / 15 ===
+2025-09-20 21:09:11,069 - DEBUG - Sampled few-shot indices: 4467
+2025-09-20 21:09:11,069 - INFO - Generated 1 few-shot messages using indices 4467
+2025-09-20 21:09:11,070 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:09:11,070 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:09:11,078 - DEBUG - Running generation on the batch...
+2025-09-20 21:09:29,546 - DEBUG - Generation for this batch completed.
+2025-09-20 21:09:29,582 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:09:29,583 - INFO - Progress saved: iteration=13, next data index=30
+2025-09-20 21:09:29,583 - INFO - Completed iteration 13
+2025-09-20 21:09:29,583 - INFO - === Starting iteration 14 / 15 ===
+2025-09-20 21:09:29,584 - DEBUG - Sampled few-shot indices: 712
+2025-09-20 21:09:29,584 - INFO - Generated 1 few-shot messages using indices 712
+2025-09-20 21:09:29,584 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:09:29,584 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:09:29,593 - DEBUG - Running generation on the batch...
+2025-09-20 21:09:46,572 - DEBUG - Generation for this batch completed.
+2025-09-20 21:09:46,608 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:09:46,609 - INFO - Progress saved: iteration=14, next data index=30
+2025-09-20 21:09:46,609 - INFO - Completed iteration 14
+2025-09-20 21:09:46,609 - INFO - === Starting iteration 15 / 15 ===
+2025-09-20 21:09:46,610 - DEBUG - Sampled few-shot indices: 4837
+2025-09-20 21:09:46,610 - INFO - Generated 1 few-shot messages using indices 4837
+2025-09-20 21:09:46,610 - INFO - Generating batch from data index 0 to 29...
+2025-09-20 21:09:46,610 - DEBUG - Preparing prompts for a batch of 30 items.
+2025-09-20 21:09:46,619 - DEBUG - Running generation on the batch...
+2025-09-20 21:10:01,804 - DEBUG - Generation for this batch completed.
+2025-09-20 21:10:01,841 - INFO - Appended 30 items to output/generations/data_gen.jsonl
+2025-09-20 21:10:01,841 - INFO - Progress saved: iteration=15, next data index=30
+2025-09-20 21:10:01,841 - INFO - Completed iteration 15
+2025-09-20 21:10:01,841 - INFO - All generations completed!
+2025-09-20 21:10:01,842 - INFO - Exiting script.
