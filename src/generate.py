@@ -14,6 +14,10 @@ from sqlalchemy import create_engine
 from utils import append_jsonl_file, read_json_file, read_jsonl_file
 from schema_engine import SchemaEngine
 
+import json
+SCHEMA_LINKING_PATH = "/home/ubuntu/bird-sql-forked/analysis/candidate_sql_parsed.json"
+with open(SCHEMA_LINKING_PATH, 'r') as f:
+    SCHEMA_LINKING = json.load(f)
 
 def extract_schema_linking(sql_query, dialect="sqlite"):
     """Extract table and column information from SQL query using sqlglot."""
@@ -48,12 +52,12 @@ def extract_schema_linking(sql_query, dialect="sqlite"):
         return {"error": str(e)}
 
 
-def get_linked_schema(db_path, db_id, sql_query, include_columns=False):
+def get_linked_schema(db_path, db_id, sql_query, include_columns=False, question_id=None):
     """Generate schema for only the tables/columns used in the SQL query."""
     try:
         # Extract table/column information from SQL
-        schema_info = extract_schema_linking(sql_query)
-
+        # schema_info = extract_schema_linking(sql_query) # golden sql based schema linking - perfect schema linking
+        schema_info = SCHEMA_LINKING[str(question_id)]
         if "error" in schema_info:
             # If parsing fails, fall back to full schema
             return open(f"{db_path}.mschema", "r").read()
@@ -81,14 +85,16 @@ def get_linked_schema(db_path, db_id, sql_query, include_columns=False):
                 selected_tables=tables_used,
                 selected_columns=selected_columns
             )
+            # print(tables_used, selected_columns)
         else:
             # Generate mschema for only the linked tables (all columns)
+            print("#################### Using Tables only for {db_id} ####################")
             linked_mschema = schema_engine.mschema.to_mschema(selected_tables=tables_used)
 
         return linked_mschema
 
     except Exception as e:
-        logging.warning(f"Schema linking failed for {db_id}: {e}. Using full schema.")
+        logging.warning(f"#################### Schema linking failed for {db_id}: {e}. Using full schema. ####################")
         # Fall back to full schema if anything goes wrong
         return open(f"{db_path}.mschema", "r").read()
 
@@ -109,7 +115,8 @@ def generate_prompt_message(datum, use_schema_linking=True, include_columns_link
             datum['db_path'],
             datum.get('db_id', 'unknown'),
             datum["SQL"],
-            include_columns=include_columns_linking
+            include_columns=include_columns_linking,
+            question_id=datum["question_id"]
         )
     else:
         # Fall back to full schema

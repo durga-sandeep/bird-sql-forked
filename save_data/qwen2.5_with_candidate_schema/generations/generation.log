@@ -1,0 +1,303 @@
+2025-09-21 02:45:52,645 - INFO - Starting generation script with arguments:
+2025-09-21 02:45:52,645 - INFO -   input_file: data/test_all.jsonl
+2025-09-21 02:45:52,645 - INFO -   output_dir: output/generations/
+2025-09-21 02:45:52,646 - INFO -   few_shot_dir: few_shots
+2025-09-21 02:45:52,646 - INFO -   model: models/generator
+2025-09-21 02:45:52,646 - INFO -   system_prompt: You are a SQLite expert tasked with writing SQL for a given natural language user query. You would be given database information in form of CREATE TABLE statements; External Knowledge which are hints; user natural language query. Your task is to write valid SQLite to answer the user questions for the tables provided.
+2025-09-21 02:45:52,646 - INFO -   batch_size: 256
+2025-09-21 02:45:52,646 - INFO -   num_samples_per_prompt: 16
+2025-09-21 02:45:52,646 - INFO -   num_prompts_per_query: 16
+2025-09-21 02:45:52,646 - INFO -   num_shots: 1
+2025-09-21 02:45:52,646 - INFO -   max_tokens: 1024
+2025-09-21 02:45:52,646 - INFO -   seed: 42
+2025-09-21 02:45:52,646 - INFO -   temperature: 1.0
+2025-09-21 02:45:52,646 - INFO -   num_gpus: 1
+2025-09-21 02:45:52,646 - INFO -   start_from_scratch: False
+2025-09-21 02:45:52,646 - INFO -   stop: [';', '<pad>', '<|endoftext|>', '</s>', '<|im_end|>']
+2025-09-21 02:45:52,646 - INFO -   num_partitions: 1
+2025-09-21 02:45:52,646 - INFO -   partition_index: 0
+2025-09-21 02:45:52,646 - INFO -   use_schema_linking: True
+2025-09-21 02:45:52,646 - INFO -   include_columns_linking: True
+2025-09-21 02:45:52,646 - INFO - Reading input data...
+2025-09-21 02:45:52,647 - INFO - Data size after partitioning: 500 items (partition 1 of 1)
+2025-09-21 02:45:52,669 - INFO - Read 7428 few-shot examples from few_shots
+2025-09-21 02:45:52,669 - INFO - Output file path: output/generations/data_gen.jsonl
+2025-09-21 02:45:52,669 - INFO - No existing progress to resume from. Starting from scratch.
+2025-09-21 02:45:52,669 - INFO - Initializing model and tokenizer...
+2025-09-21 02:46:04,387 - DEBUG - Starting new HTTPS connection (1): stats.vllm.ai:443
+2025-09-21 02:46:04,534 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 02:47:15,184 - INFO - Model and tokenizer initialized.
+2025-09-21 02:47:15,185 - DEBUG - Fast-forwarding random seed for 0 iterations...
+2025-09-21 02:47:15,185 - DEBUG - Done fast-forwarding random state.
+2025-09-21 02:47:15,185 - INFO - === Starting iteration 0 / 15 ===
+2025-09-21 02:47:15,187 - DEBUG - Sampled few-shot indices: 5238
+2025-09-21 02:47:15,187 - INFO - Generated 1 few-shot messages using indices 5238
+2025-09-21 02:47:15,187 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 02:47:15,188 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 02:47:45,286 - DEBUG - Running generation on the batch...
+2025-09-21 02:49:52,871 - DEBUG - Generation for this batch completed.
+2025-09-21 02:49:53,083 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 02:49:53,083 - INFO - Progress saved: iteration=0, next data index=256
+2025-09-21 02:49:53,083 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 02:49:53,083 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 02:50:31,868 - DEBUG - Running generation on the batch...
+2025-09-21 02:52:05,252 - DEBUG - Generation for this batch completed.
+2025-09-21 02:52:05,431 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 02:52:05,432 - INFO - Progress saved: iteration=0, next data index=500
+2025-09-21 02:52:05,432 - INFO - Completed iteration 0
+2025-09-21 02:52:05,432 - INFO - === Starting iteration 1 / 15 ===
+2025-09-21 02:52:05,432 - DEBUG - Sampled few-shot indices: 912
+2025-09-21 02:52:05,432 - INFO - Generated 1 few-shot messages using indices 912
+2025-09-21 02:52:05,432 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 02:52:05,433 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 02:52:34,928 - DEBUG - Running generation on the batch...
+2025-09-21 02:54:33,953 - DEBUG - Generation for this batch completed.
+2025-09-21 02:54:34,158 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 02:54:34,159 - INFO - Progress saved: iteration=1, next data index=256
+2025-09-21 02:54:34,159 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 02:54:34,159 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 02:55:13,151 - DEBUG - Running generation on the batch...
+2025-09-21 02:56:04,638 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 02:56:04,829 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 02:56:55,487 - DEBUG - Generation for this batch completed.
+2025-09-21 02:56:55,672 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 02:56:55,672 - INFO - Progress saved: iteration=1, next data index=500
+2025-09-21 02:56:55,672 - INFO - Completed iteration 1
+2025-09-21 02:56:55,672 - INFO - === Starting iteration 2 / 15 ===
+2025-09-21 02:56:55,673 - DEBUG - Sampled few-shot indices: 204
+2025-09-21 02:56:55,673 - INFO - Generated 1 few-shot messages using indices 204
+2025-09-21 02:56:55,673 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 02:56:55,673 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 02:57:25,633 - DEBUG - Running generation on the batch...
+2025-09-21 02:59:29,096 - DEBUG - Generation for this batch completed.
+2025-09-21 02:59:29,307 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 02:59:29,307 - INFO - Progress saved: iteration=2, next data index=256
+2025-09-21 02:59:29,307 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 02:59:29,307 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:00:09,568 - DEBUG - Running generation on the batch...
+2025-09-21 03:01:46,209 - DEBUG - Generation for this batch completed.
+2025-09-21 03:01:46,390 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:01:46,390 - INFO - Progress saved: iteration=2, next data index=500
+2025-09-21 03:01:46,390 - INFO - Completed iteration 2
+2025-09-21 03:01:46,390 - INFO - === Starting iteration 3 / 15 ===
+2025-09-21 03:01:46,391 - DEBUG - Sampled few-shot indices: 6074
+2025-09-21 03:01:46,391 - INFO - Generated 1 few-shot messages using indices 6074
+2025-09-21 03:01:46,391 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:01:46,391 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:02:16,068 - DEBUG - Running generation on the batch...
+2025-09-21 03:04:18,083 - DEBUG - Generation for this batch completed.
+2025-09-21 03:04:18,295 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:04:18,296 - INFO - Progress saved: iteration=3, next data index=256
+2025-09-21 03:04:18,296 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:04:18,296 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:04:56,780 - DEBUG - Running generation on the batch...
+2025-09-21 03:06:04,934 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:06:05,121 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:06:27,088 - DEBUG - Generation for this batch completed.
+2025-09-21 03:06:27,273 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:06:27,274 - INFO - Progress saved: iteration=3, next data index=500
+2025-09-21 03:06:27,274 - INFO - Completed iteration 3
+2025-09-21 03:06:27,274 - INFO - === Starting iteration 4 / 15 ===
+2025-09-21 03:06:27,274 - DEBUG - Sampled few-shot indices: 2253
+2025-09-21 03:06:27,274 - INFO - Generated 1 few-shot messages using indices 2253
+2025-09-21 03:06:27,274 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:06:27,274 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:06:57,268 - DEBUG - Running generation on the batch...
+2025-09-21 03:09:04,247 - DEBUG - Generation for this batch completed.
+2025-09-21 03:09:04,459 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:09:04,459 - INFO - Progress saved: iteration=4, next data index=256
+2025-09-21 03:09:04,459 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:09:04,459 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:09:43,641 - DEBUG - Running generation on the batch...
+2025-09-21 03:11:15,809 - DEBUG - Generation for this batch completed.
+2025-09-21 03:11:15,999 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:11:15,999 - INFO - Progress saved: iteration=4, next data index=500
+2025-09-21 03:11:15,999 - INFO - Completed iteration 4
+2025-09-21 03:11:15,999 - INFO - === Starting iteration 5 / 15 ===
+2025-09-21 03:11:15,999 - DEBUG - Sampled few-shot indices: 2006
+2025-09-21 03:11:16,000 - INFO - Generated 1 few-shot messages using indices 2006
+2025-09-21 03:11:16,000 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:11:16,000 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:11:45,681 - DEBUG - Running generation on the batch...
+2025-09-21 03:13:39,951 - DEBUG - Generation for this batch completed.
+2025-09-21 03:13:40,153 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:13:40,154 - INFO - Progress saved: iteration=5, next data index=256
+2025-09-21 03:13:40,154 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:13:40,154 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:14:17,692 - DEBUG - Running generation on the batch...
+2025-09-21 03:15:51,692 - DEBUG - Generation for this batch completed.
+2025-09-21 03:15:51,878 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:15:51,878 - INFO - Progress saved: iteration=5, next data index=500
+2025-09-21 03:15:51,878 - INFO - Completed iteration 5
+2025-09-21 03:15:51,878 - INFO - === Starting iteration 6 / 15 ===
+2025-09-21 03:15:51,878 - DEBUG - Sampled few-shot indices: 1828
+2025-09-21 03:15:51,878 - INFO - Generated 1 few-shot messages using indices 1828
+2025-09-21 03:15:51,878 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:15:51,879 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:16:05,226 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:16:05,421 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:16:21,691 - DEBUG - Running generation on the batch...
+2025-09-21 03:18:11,342 - DEBUG - Generation for this batch completed.
+2025-09-21 03:18:11,552 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:18:11,552 - INFO - Progress saved: iteration=6, next data index=256
+2025-09-21 03:18:11,552 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:18:11,552 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:18:50,251 - DEBUG - Running generation on the batch...
+2025-09-21 03:20:19,408 - DEBUG - Generation for this batch completed.
+2025-09-21 03:20:19,587 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:20:19,587 - INFO - Progress saved: iteration=6, next data index=500
+2025-09-21 03:20:19,587 - INFO - Completed iteration 6
+2025-09-21 03:20:19,587 - INFO - === Starting iteration 7 / 15 ===
+2025-09-21 03:20:19,588 - DEBUG - Sampled few-shot indices: 1143
+2025-09-21 03:20:19,588 - INFO - Generated 1 few-shot messages using indices 1143
+2025-09-21 03:20:19,588 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:20:19,588 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:20:49,813 - DEBUG - Running generation on the batch...
+2025-09-21 03:22:54,827 - DEBUG - Generation for this batch completed.
+2025-09-21 03:22:55,024 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:22:55,024 - INFO - Progress saved: iteration=7, next data index=256
+2025-09-21 03:22:55,024 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:22:55,024 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:23:33,535 - DEBUG - Running generation on the batch...
+2025-09-21 03:25:02,329 - DEBUG - Generation for this batch completed.
+2025-09-21 03:25:02,517 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:25:02,517 - INFO - Progress saved: iteration=7, next data index=500
+2025-09-21 03:25:02,518 - INFO - Completed iteration 7
+2025-09-21 03:25:02,518 - INFO - === Starting iteration 8 / 15 ===
+2025-09-21 03:25:02,518 - DEBUG - Sampled few-shot indices: 6033
+2025-09-21 03:25:02,518 - INFO - Generated 1 few-shot messages using indices 6033
+2025-09-21 03:25:02,518 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:25:02,518 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:25:32,974 - DEBUG - Running generation on the batch...
+2025-09-21 03:26:05,430 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:26:05,634 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:27:33,574 - DEBUG - Generation for this batch completed.
+2025-09-21 03:27:33,778 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:27:33,779 - INFO - Progress saved: iteration=8, next data index=256
+2025-09-21 03:27:33,779 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:27:33,779 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:28:12,580 - DEBUG - Running generation on the batch...
+2025-09-21 03:29:47,765 - DEBUG - Generation for this batch completed.
+2025-09-21 03:29:47,951 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:29:47,952 - INFO - Progress saved: iteration=8, next data index=500
+2025-09-21 03:29:47,952 - INFO - Completed iteration 8
+2025-09-21 03:29:47,952 - INFO - === Starting iteration 9 / 15 ===
+2025-09-21 03:29:47,952 - DEBUG - Sampled few-shot indices: 839
+2025-09-21 03:29:47,952 - INFO - Generated 1 few-shot messages using indices 839
+2025-09-21 03:29:47,952 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:29:47,952 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:30:18,196 - DEBUG - Running generation on the batch...
+2025-09-21 03:32:21,458 - DEBUG - Generation for this batch completed.
+2025-09-21 03:32:21,660 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:32:21,660 - INFO - Progress saved: iteration=9, next data index=256
+2025-09-21 03:32:21,660 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:32:21,660 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:33:00,542 - DEBUG - Running generation on the batch...
+2025-09-21 03:34:34,182 - DEBUG - Generation for this batch completed.
+2025-09-21 03:34:34,363 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:34:34,364 - INFO - Progress saved: iteration=9, next data index=500
+2025-09-21 03:34:34,364 - INFO - Completed iteration 9
+2025-09-21 03:34:34,364 - INFO - === Starting iteration 10 / 15 ===
+2025-09-21 03:34:34,364 - DEBUG - Sampled few-shot indices: 5543
+2025-09-21 03:34:34,364 - INFO - Generated 1 few-shot messages using indices 5543
+2025-09-21 03:34:34,364 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:34:34,365 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:35:06,522 - DEBUG - Running generation on the batch...
+2025-09-21 03:36:05,646 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:36:05,834 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:36:49,623 - DEBUG - Generation for this batch completed.
+2025-09-21 03:36:49,834 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:36:49,834 - INFO - Progress saved: iteration=10, next data index=256
+2025-09-21 03:36:49,834 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:36:49,834 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:37:29,223 - DEBUG - Running generation on the batch...
+2025-09-21 03:38:58,523 - DEBUG - Generation for this batch completed.
+2025-09-21 03:38:58,703 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:38:58,703 - INFO - Progress saved: iteration=10, next data index=500
+2025-09-21 03:38:58,703 - INFO - Completed iteration 10
+2025-09-21 03:38:58,703 - INFO - === Starting iteration 11 / 15 ===
+2025-09-21 03:38:58,703 - DEBUG - Sampled few-shot indices: 6067
+2025-09-21 03:38:58,704 - INFO - Generated 1 few-shot messages using indices 6067
+2025-09-21 03:38:58,704 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:38:58,704 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:39:29,100 - DEBUG - Running generation on the batch...
+2025-09-21 03:41:25,184 - DEBUG - Generation for this batch completed.
+2025-09-21 03:41:25,399 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:41:25,399 - INFO - Progress saved: iteration=11, next data index=256
+2025-09-21 03:41:25,400 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:41:25,400 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:42:04,261 - DEBUG - Running generation on the batch...
+2025-09-21 03:43:34,680 - DEBUG - Generation for this batch completed.
+2025-09-21 03:43:34,859 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:43:34,859 - INFO - Progress saved: iteration=11, next data index=500
+2025-09-21 03:43:34,859 - INFO - Completed iteration 11
+2025-09-21 03:43:34,859 - INFO - === Starting iteration 12 / 15 ===
+2025-09-21 03:43:34,859 - DEBUG - Sampled few-shot indices: 7308
+2025-09-21 03:43:34,860 - INFO - Generated 1 few-shot messages using indices 7308
+2025-09-21 03:43:34,860 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:43:34,860 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:44:04,847 - DEBUG - Running generation on the batch...
+2025-09-21 03:46:05,937 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:46:06,126 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:46:19,093 - DEBUG - Generation for this batch completed.
+2025-09-21 03:46:19,305 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:46:19,305 - INFO - Progress saved: iteration=12, next data index=256
+2025-09-21 03:46:19,305 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:46:19,306 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:46:58,484 - DEBUG - Running generation on the batch...
+2025-09-21 03:48:33,530 - DEBUG - Generation for this batch completed.
+2025-09-21 03:48:33,727 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:48:33,727 - INFO - Progress saved: iteration=12, next data index=500
+2025-09-21 03:48:33,727 - INFO - Completed iteration 12
+2025-09-21 03:48:33,727 - INFO - === Starting iteration 13 / 15 ===
+2025-09-21 03:48:33,727 - DEBUG - Sampled few-shot indices: 4467
+2025-09-21 03:48:33,728 - INFO - Generated 1 few-shot messages using indices 4467
+2025-09-21 03:48:33,728 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:48:33,728 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:49:04,456 - DEBUG - Running generation on the batch...
+2025-09-21 03:51:21,688 - DEBUG - Generation for this batch completed.
+2025-09-21 03:51:21,896 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:51:21,897 - INFO - Progress saved: iteration=13, next data index=256
+2025-09-21 03:51:21,897 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:51:21,897 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:52:00,677 - DEBUG - Running generation on the batch...
+2025-09-21 03:53:40,747 - DEBUG - Generation for this batch completed.
+2025-09-21 03:53:40,930 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:53:40,930 - INFO - Progress saved: iteration=13, next data index=500
+2025-09-21 03:53:40,930 - INFO - Completed iteration 13
+2025-09-21 03:53:40,930 - INFO - === Starting iteration 14 / 15 ===
+2025-09-21 03:53:40,930 - DEBUG - Sampled few-shot indices: 712
+2025-09-21 03:53:40,930 - INFO - Generated 1 few-shot messages using indices 712
+2025-09-21 03:53:40,931 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:53:40,931 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:54:10,949 - DEBUG - Running generation on the batch...
+2025-09-21 03:56:06,229 - DEBUG - Resetting dropped connection: stats.vllm.ai
+2025-09-21 03:56:06,412 - DEBUG - https://stats.vllm.ai:443 "POST / HTTP/1.1" 200 None
+2025-09-21 03:56:18,232 - DEBUG - Generation for this batch completed.
+2025-09-21 03:56:18,448 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 03:56:18,449 - INFO - Progress saved: iteration=14, next data index=256
+2025-09-21 03:56:18,449 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 03:56:18,449 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 03:56:58,608 - DEBUG - Running generation on the batch...
+2025-09-21 03:58:32,559 - DEBUG - Generation for this batch completed.
+2025-09-21 03:58:32,754 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 03:58:32,754 - INFO - Progress saved: iteration=14, next data index=500
+2025-09-21 03:58:32,754 - INFO - Completed iteration 14
+2025-09-21 03:58:32,755 - INFO - === Starting iteration 15 / 15 ===
+2025-09-21 03:58:32,755 - DEBUG - Sampled few-shot indices: 4837
+2025-09-21 03:58:32,755 - INFO - Generated 1 few-shot messages using indices 4837
+2025-09-21 03:58:32,755 - INFO - Generating batch from data index 0 to 255...
+2025-09-21 03:58:32,755 - DEBUG - Preparing prompts for a batch of 256 items.
+2025-09-21 03:59:03,135 - DEBUG - Running generation on the batch...
+2025-09-21 04:00:58,482 - DEBUG - Generation for this batch completed.
+2025-09-21 04:00:58,689 - INFO - Appended 256 items to output/generations/data_gen.jsonl
+2025-09-21 04:00:58,689 - INFO - Progress saved: iteration=15, next data index=256
+2025-09-21 04:00:58,689 - INFO - Generating batch from data index 256 to 499...
+2025-09-21 04:00:58,690 - DEBUG - Preparing prompts for a batch of 244 items.
+2025-09-21 04:01:39,165 - DEBUG - Running generation on the batch...
+2025-09-21 04:03:12,245 - DEBUG - Generation for this batch completed.
+2025-09-21 04:03:12,433 - INFO - Appended 244 items to output/generations/data_gen.jsonl
+2025-09-21 04:03:12,434 - INFO - Progress saved: iteration=15, next data index=500
+2025-09-21 04:03:12,434 - INFO - Completed iteration 15
+2025-09-21 04:03:12,434 - INFO - All generations completed!
+2025-09-21 04:03:12,434 - INFO - Exiting script.

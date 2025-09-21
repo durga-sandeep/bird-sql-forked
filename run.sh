@@ -8,7 +8,7 @@ set -e
 echo "Starting sequential execution of BIRD SQL pipeline..."
 
 echo "Step 1: Generating SQL queries..."
-python src/generate.py --input_file data/test_all.jsonl --output_dir output/generations/ --num_gpus 1
+python src/generate.py --input_file data/test_all.jsonl --output_dir output/generations/ --num_gpus 1 --use_schema_linking --include_columns_linking
 
 echo "Step 2: Processing SQLs and comparing against ground truth..."
 python src/process_sqls.py --input_file data/test_all.jsonl --generations_dir output/generations/ --output_dir output/with_results/ --compare_against_gt --sql_timeout 30.0
