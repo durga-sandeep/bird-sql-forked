@@ -28,7 +28,7 @@ def download_with_progress(url: str, path: Path) -> None:
 def extract_and_organize_files(data_dir: Path) -> None:
     """Extract dataset and organize files into expected structure."""
     zip_path = data_dir / "dev.zip"
-    extracted_dir = data_dir / "dev"
+    extracted_dir = data_dir / "dev_20240627"
     
     # Extract main dataset
     if not extracted_dir.exists():
@@ -122,9 +122,6 @@ def preprocess_data(data_dir: Path) -> None:
     print(f"Saved processed data to {output_file}")
 
 
-import gdown
-
-
 def setup_bird_dataset(data_dir: str = "data") -> None:
     """
     Download, extract, and preprocess the BIRD benchmark dataset.
@@ -142,20 +139,15 @@ def setup_bird_dataset(data_dir: str = "data") -> None:
     data_dir.mkdir(exist_ok=True)
     
     print("=== BIRD Dataset Setup ===")
-    zip_path = data_dir / "dev.zip"
+    
     # Step 1: Download dataset
-    # The Google Drive sharing URL (the original one is fine)
-    # dev-mini - cs - https://drive.google.com/file/d/1iGAaD0u26NixN4bI2zElQVQKa9TZY2EK/view?usp=sharing
-    # dev-mini-full - https://drive.google.com/file/d/1VqkmQawhg6M8DFvo4gWQvOLyilWDDeJo/view?usp=sharing
-
-    url = "https://drive.google.com/file/d/1iGAaD0u26NixN4bI2zElQVQKa9TZY2EK/view?usp=sharing"
-
+    zip_path = data_dir / "dev.zip"
     if not zip_path.exists():
-        print("Downloading dataset from Google Drive...")
-        # gdown handles everything automatically
-        gdown.download(url, str(zip_path), quiet=False, fuzzy=True)
-    else:
-        print("Dataset already downloaded.")
+        print("Downloading BIRD dataset...")
+        download_with_progress(
+            "https://bird-bench.oss-cn-beijing.aliyuncs.com/dev.zip",
+            zip_path
+        )
     
     # Step 2: Extract and organize files
     extract_and_organize_files(data_dir)
